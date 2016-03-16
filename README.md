@@ -29,7 +29,7 @@ fatal: unable to connect to github.com_
 ###First Overview of App
 
 ####Templates
-Template will tell Ember what html to render for each page. Ember uses handlebar templating library.
+Template will tell Ember what html to render for each page.
 
 `app/templates/application.hbs` is the default template, if index.hbs is added with something in it, the `{{outlet}}` will display what is in there (default empty).
 
