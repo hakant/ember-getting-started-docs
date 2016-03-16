@@ -25,5 +25,43 @@ _Failed to execute "git ls-remote --tags --heads git://github.com/ember-cli/embe
 fatal: unable to connect to github.com_ 
 * To solve this run:
 	`git config --global url."https://".insteadOf git://`
+    
+###First Overview of App
+
+####Templates
+Template will tell Ember what html to render for each page. Ember uses handlebar templating library.
+
+`app/templates/application.hbs` is the default template, if index.hbs is added with something in it, the `{{outlet}}` will display what is in there (default empty).
+
+Creating another template will not automatically display. For this we need to tell ember in the router.js file where to go.
+
+To link to a different landing page for a user:
+`{{#link-to 'landingPage'}}landingPage{{/link-to}}` 
+
+####Router
+Manages the application state, will map the state into the url where user is and need to go to.
+
+app/router.js
+
+`Router.map(function() {
+    ---Application endpoints mapped here---
+});`
+
+`Router.map(function() {
+    this.route('orders', {path: '/orders'});
+});`
+
+___OR___
+
+`Router.map(function() {
+    this.route('orders');
+});`
+
+(path will be inferred)
+
+![image](https://cloud.githubusercontent.com/assets/17876815/13815628/a570b224-eb8b-11e5-8cf7-23d70b6b9fc8.png)
+
+(based on template created orders.hbs)
+
 
   
