@@ -8,7 +8,7 @@
 1. Install https://nodejs.org/en/download/stable/ for windows
 2. Install https://git-scm.com/downloads 
 3. Make sure to select to use the git path, if it doesnt give you the option go set the path yourself by using
-	C:\Users\{user}\AppData\Local\GitHub\PortableGit_{guid}\cmd\git.exe
+	C:\Users\{user}\AppData\Local\GitHub\PortableGit_{guid}\cmd
 4. Run `npm install -g ember-cli` in your command prompt (This will install the ember framework)
 
 ###Creating New Ember ProjectL
