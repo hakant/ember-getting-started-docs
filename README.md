@@ -25,7 +25,20 @@ _Failed to execute "git ls-remote --tags --heads git://github.com/ember-cli/embe
 fatal: unable to connect to github.com_ 
 * To solve this run:
 	`git config --global url."https://".insteadOf git://`
-    
+
+###Restoring an Ember project from Git clone
+On occasion you might want to clone your project to a seperate machine and continue development from there (e.g. Sepperation between Office and Home).
+
+Because gitignore will exclude node_modules and the bower_components, `ember serve` will throw an error complaining about modules being missing or empty.
+
+To get your project back to a working state run the following on `path\projectName>`:
+
+1. npm install
+2. npm install -g bower
+3. bower install
+
+Now when running `ember serve` everything should be back in order.
+
 ###First Overview of App
 
 ####Templates
