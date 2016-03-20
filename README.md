@@ -1,7 +1,7 @@
 ##Ember Training and Learnings
 
 ###Important links:
-This page is summary of video - * http://campus.codeschool.com/courses/try-ember/level/1/section/1/video/1
+* This page is summary of video - http://campus.codeschool.com/courses/try-ember/level/1/section/1/video/1
 * http://emberjs.com/
 
 ###Installing Ember:
