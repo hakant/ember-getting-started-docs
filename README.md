@@ -56,19 +56,27 @@ Manages the application state, will map the state into the url where user is and
 
 app/router.js
 
-`Router.map(function() {
-    ---Application endpoints mapped here---
-});`
+```javascript
 
-`Router.map(function() {
+Router.map(function() {
+    ---Application endpoints mapped here---
+});
+
+Router.map(function() {
     this.route('orders', {path: '/orders'});
-});`
+});
+
+```
 
 ___OR___
 
-`Router.map(function() {
+```javascript
+
+Router.map(function() {
     this.route('orders');
-});`
+});
+
+```
 
 (path will be inferred)
 
@@ -76,5 +84,67 @@ ___OR___
 
 (based on template created orders.hbs)
 
+####Routes
+Collecting and organising data and handing off the data to templates to be rendered.
+
+Ember CLI provides generator for creating a route and updating the router.
+
+`ember generate route <route-name>`
+
+![image](https://cloud.githubusercontent.com/assets/17876815/13903700/eda41498-ee86-11e5-81cf-f6f3c2a96a09.png)
+
+As you can see it will automatically generate:
+* file in routes for you (newroute.js)
+* template file (newroute.hbs)
+
+This will also add the route `this.route('newroute');` in the router.js
+
+___Routes extended___
+
+The js file in the routes folder `newroute.js` will extend the ember route and can be customised for this 
+particular route without effecting any other route.
+
+_Customizing the Route_
+
+To customise the route you can add a function or hook, in this case a model function will be added which can return anything
+to be available to the template.
+
+In my case I added a model hook with returning an array to the template:
+
+app\routes\newroute.js - 
+
+```javascript
+
+export default Ember.Route.extend({
+    model() {
+        return [{ id:'myid', name:'myname' },
+        { id:'myid2', name:'myname2' }
+        ];
+    }
+});
+
+```
+
+and in the app\templates\newroute.hbs - 
+
+```javascript
+New route <br>
+
+{{#each model as |name|}}
+    id - {{name.id}}<br>
+    name - {{name.name}}<br>
+{{/each}}
+
+```
+
+This will give me the following outcome:
+
+![image](https://cloud.githubusercontent.com/assets/17876815/13903882/e001aed0-ee8c-11e5-88a5-c0abf025a1de.png)
+
+
+
+
+
+ 
 
   
