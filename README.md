@@ -182,8 +182,6 @@ ___NOTE___ in te snippet above we also find a specific record by Id and say that
      another js file called newroutes which will have the code as mentioned above. In the case of this example we have a newroute.js and a newroutes.js file, both which contains the model hook. The only difference is,
      because my newroutes.hbs only need to display information we requested, the model in the js file in routes will contain params and a findBy.
      
-newroute.js
-
 ```javascript
 
 `newroute.js`
