@@ -303,7 +303,7 @@ export default Ember.Route.extend({
     model() {
     	const store = this.get('store');
         return store.getOrders();
-     }
+     },
     
     `store: equals local name of service and ('store') equals the name of the service to inject`
     store: Ember.inject.service('store')
@@ -313,3 +313,34 @@ export default Ember.Route.extend({
 ```
 
 After injection, the store service becomes available as the "store" property.
+
+To finalise the code and make sure the data is used correctly everywhere, where it is needed a few more changes are needed. Final code snippet below:
+
+```javascript
+
+`app/services/store`
+export default Ember.Service.extend({
+    getOrdersById(id){
+        const orders = this.getOrders();
+        return orders.findBy('id',id); `the find by was moved from newroutes.js`
+    },
+    
+    getOrders(){
+       return [{ id:'1', name:'myname' },
+        { id:'2', name:'myname2' }
+        ];
+    }
+});
+
+`app/routes/newroute/newroutes.js`
+export default Ember.Route.extend({
+    model(params) {
+        const id = params.newroute_id;
+        const store = this.get('store');
+        return store.getOrdersById(id);
+    },
+    
+    store: Ember.inject.service()
+});
+
+```
