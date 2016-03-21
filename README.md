@@ -226,7 +226,7 @@ typing the path to navigate to.
 ```html
 
 {{#each model as |name|}}
-    {{#link-to "newroutes" name}} `Note that next to link-to there are extra paramaters - "newroutes"=route name and name=object`
+    {{#link-to "newroutes" name}} `Note that next to link-to there are extra paramaters - "newroutes"=route name and name=object to view`
         id - {{name.id}}
     {{/link-to}}
         ::: name - {{name.name}}<br>    
@@ -234,6 +234,47 @@ typing the path to navigate to.
 
 ```
 
- 
+___Nested Route___
+
+Because we do not want to lose the list that will navigate us to the users requested information (we want this list of names on the same page in order to navigate around).
+
+As the current templates are sibling of one another they will end up replacing one another as we navigate and fill the `{{outcome}}` on the main page. This means that when we navigate to newroutes it will replace newroute and
+we loose the list of items from our page. In oreder to not loose this listing we use nested routes, which will allow us to display multiple templates on the same page.
+
+```javascript
+
+`nested route
+Add anonymous function in the parent route which will make the newroutes a child route of the newroute parents route. This will automaticaaly inherit the newroute as parent and you do not need to 
+specify the path: /newroute/:newroute_id `
+
+Router.map(function() {
+  this.route('orders');
+  this.route('newroute', function(){
+      this.route('newroutes', {path: '/:newroute_id'});
+  });
+});
+
+``` 
+
+To make the nesting work correctly, a few more changes are needed. From here we go to the `#each` in our newroute template and change it to:
+
+```html
+
+`because newroutes is now a child of newroute we need to change the link to route name to be newroute.newroutes`
+{{#each model as |name|}}
+    {{#link-to "newroute.newroutes" name}}
+        id - {{name.id}}
+    {{/link-to}}
+        ::: name - {{name.name}}<br>    
+{{/each}}
+
+{{outlet}}
+
+```
+
+Outcome
+
+![image](https://cloud.githubusercontent.com/assets/17876815/13922421/78c7ace2-ef7c-11e5-9356-c3298802c623.png)
+
 
   
