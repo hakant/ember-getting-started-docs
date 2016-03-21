@@ -277,4 +277,39 @@ Outcome
 ![image](https://cloud.githubusercontent.com/assets/17876815/13922421/78c7ace2-ef7c-11e5-9356-c3298802c623.png)
 
 
-  
+###Models and Services
+To centralise the data we will create services. Services are long living objects available throughout the app (singleton). For this the data will be stored in a data repository service.
+
+`ember gemerate service <service-name>`
+
+![image](https://cloud.githubusercontent.com/assets/17876815/13931309/03eb0172-efa3-11e5-82fb-8e524b6356d5.png)
+
+Services are made available within other objects by using `Ember.inject.service()`
+
+```javascript
+
+`app\service\store.js`
+export default Ember.Service.extend({
+    getOrders(){
+    `The data was moved over from the newroute model hook into the getOrders function`
+       return [{ id:'1', name:'myname' },
+        { id:'2', name:'myname2' }
+        ];
+    }
+});
+
+`app\routes\newroute.js`
+export default Ember.Route.extend({
+    model() {
+    	const store = this.get('store');
+        return store.getOrders();
+     }
+    
+    `store: equals local name of service and ('store') equals the name of the service to inject`
+    store: Ember.inject.service('store')
+    `because the service name matches the property name you can leave or drop the service name and ember will infer it from property 	     name e.g. store: Ember.inject.service()`
+});
+
+```
+
+After injection, the store service becomes available as the "store" property.
