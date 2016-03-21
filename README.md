@@ -180,7 +180,31 @@ ___NOTE___ in te snippet above we also find a specific record by Id and say that
  
     * Each template will need its own routes js file containing the data that need to be manipulated. So for our template newroutes.hbs we need in our app/routes
      another js file called newroutes which will have the code as mentioned above. In the case of this example we have a newroute.js and a newroutes.js file, both which contains the model hook. The only difference is,
-     because my newroutes.hbs only need to display information I requested, the model in the js file in routes will contain params and a findBy.
+     because my newroutes.hbs only need to display information we requested, the model in the js file in routes will contain params and a findBy.
+     
+newroute.js
+
+```javascript
+
+`newroute.js`
+export default Ember.Route.extend({
+    model() {
+        return [{ id:'1', name:'myname' },
+        { id:'2', name:'myname2' }
+        ];
+    }
+});
+
+`newroutes.js`
+export default Ember.Route.extend({
+    model(params) {
+        return [{ id:'1', name:'myname' },
+        { id:'2', name:'myname2' }
+        ].findBy('id', params.newroute_id);
+    }
+});
+
+```
        
 
  
