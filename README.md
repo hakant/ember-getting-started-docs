@@ -141,9 +141,47 @@ This will give me the following outcome:
 
 ![image](https://cloud.githubusercontent.com/assets/17876815/13903882/e001aed0-ee8c-11e5-88a5-c0abf025a1de.png)
 
+___Define Dynamic Segments in Router___
 
+First we need to map where the dynamic segement will route. In the router map section we add: `this.route('newroutes', {path: '/newroute/:newroute_id'});`.
+The `:` in the path represents the dynamic segment and where it starts, these dynamic segments is placeholders for when you pass your 'id' or other params.
+For instance if I have a request coming in for /newroute/1, the browser will go through mapping to try and find a match.
 
+```javascript
 
+Router.map(function() {
+  this.route('orders');
+  this.route('newroute');
+  this.route('newroutes', {path: '/newroute/:newroute_id'}); `-finds match here for /newroute/1 and will then navigate to newroutes template`
+});
+
+``` 
+
+Once it macthes the router will pickup on the dynamic value and capture that portion - in this case ':newroute_id' matcheds the '1'.
+It will then map the 1 to a newroute_id variable and put it into a hash {newroute_id:1}, which is then sent to the route to tell it what the user request is.
+
+Whatever dynamic data is found will be handed over to the route and can be passed into the model hook to find the data the user has requested. This is usually represented by `params`as can be seen in code snippet bewow:
+
+```javascript
+
+export default Ember.Route.extend({
+    model(params) {
+        return [{ id:'1', name:'myname' },
+        { id:'2', name:'myname2' }
+        ].findBy('id', params.newroute_id);
+    }
+});
+
+```
+___NOTE___ in te snippet above we also find a specific record by Id and say that we want this id to be what ever was passed through
+ as params, in this case newroute_id was mapped as 1. This will return the record with the id of 1.
+ 
+ * Take note of the following
+ 
+    * Each template will need its own routes js file containing the data that need to be manipulated. So for our template newroutes.hbs we need in our app/routes
+     another js file called newroutes which will have the code as mentioned above. In the case of this example we have a newroute.js and a newroutes.js file, both which contains the model hook. The only difference is,
+     because my newroutes.hbs only need to display information I requested, the model in the js file in routes will contain params and a findBy.
+       
 
  
 
