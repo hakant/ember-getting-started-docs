@@ -205,7 +205,16 @@ export default Ember.Route.extend({
 });
 
 ```
-       
+
+After the data is manipulated to represent what the user has requested, we need a template that can display this data to the user. In this cas a simple newroutes.hbs template is created to display what was requested:
+
+```html
+
+this is from new route <br>
+id = {{model.id}}
+name = {{model.name}}
+
+```    
 
  
 
