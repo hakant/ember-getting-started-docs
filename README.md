@@ -216,10 +216,23 @@ name = {{model.name}}
 
 ```   
 
-outcome:
+Outcome after typing newroute/1:
 
 ![image](https://cloud.githubusercontent.com/assets/17876815/13919672/309dff78-ef6f-11e5-9ce3-5ee4a42645e4.png)
- 
+
+We can add a link to for each name or id for our data displayed to the user in our template file for newroute. This will allow the user to click on displayed data and be routed to data that they want to see instead of
+typing the path to navigate to.
+
+```html
+
+{{#each model as |name|}}
+    {{#link-to "newroutes" name}} `Note that next to link-to there are extra paramaters - "newroutes"=route name and name=object`
+        id - {{name.id}}
+    {{/link-to}}
+        ::: name - {{name.name}}<br>    
+{{/each}}
+
+```
 
  
 
