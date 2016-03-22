@@ -1,5 +1,7 @@
 #Ember getting started
 
+* here is my beautiful idea
+
 ##Ember Training and Learnings
 
 ###Important links:
